@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A little surprise!</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 1s ease-out, opacity 1s ease-out;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hidden {
+            transform: translateY(200vh); 
+            opacity: 0;
+        }
+
+        .emoji {
+            font-size: 5rem;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .visible {
+            opacity: 1;
+        }
+        @keyframes shake-eyes {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(2px, -2px); }
+            75% { transform: translate(-2px, -2px); }
+        }
+
+        .eyes {
+            display: inline-block;
+            animation: shake-eyes 0.5s infinite; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="emoji" class="emoji">🖕</div>
+    <div id="circle" class="circle">🎁<span class="eyes">👀</span></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const circle = document.getElementById("circle");
+            const emoji = document.getElementById("emoji");
+
+            // Añadir el evento de clic al círculo
+            circle.addEventListener("click", () => {
+                circle.classList.add("hidden");
+
+                setTimeout(() => {
+                    emoji.classList.add("visible");
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
