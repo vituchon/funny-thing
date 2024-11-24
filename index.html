@@ -57,12 +57,50 @@
             display: inline-block;
             animation: shake-eyes 0.5s infinite; 
         }
+  
+        @keyframes left-to-right {
+    0% {
+        transform: translateX(-100vw) rotate(0deg);
+    }
+    100% {
+        transform: translateX(100vw) rotate(360deg);
+    }
+}
+
+@keyframes right-to-left {
+    0% {
+        transform: translateX(100vw) rotate(0deg);
+    }
+    100% {
+        transform: translateX(-100vw) rotate(360deg);
+    }
+}
+
+.emoji-fly {
+    position: absolute;
+    top: 50%;
+    font-size: 2rem;
+    animation-duration: 10s; 
+    animation-iteration-count: infinite;
+    opacity: 1;
+    animation-timing-function: linear;
+}
+
+.left-to-right {
+    animation-name: left-to-right;
+}
+
+.right-to-left {
+    animation-name: right-to-left;
+}
+
     </style>
 </head>
 <body>
 
     <div id="emoji" class="emoji">🖕</div>
     <div id="circle" class="circle">🎁 <span class="eyes">👀</span></div>
+    <div id="emoji-container"></div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -78,6 +116,31 @@
                 }, 500);
             });
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const circle = document.getElementById("circle");
+            const emojiContainer = document.getElementById("emoji-container");
+
+            circle.addEventListener("click", () => {
+                for (let i = 0; i < 4; i++) {
+                    const emoji = document.createElement("div");
+                    emoji.textContent = "😂"; 
+                    emoji.classList.add("emoji-fly");
+
+                    if (i % 2 === 0) {
+                        emoji.classList.add("left-to-right");
+                    } else {
+                        emoji.classList.add("right-to-left");
+                    }
+
+                    emoji.style.top = `${Math.random() * 100}vh`;
+
+                    emojiContainer.appendChild(emoji);
+                }
+            });
+        });
+
+
     </script>
 </body>
 </html>
